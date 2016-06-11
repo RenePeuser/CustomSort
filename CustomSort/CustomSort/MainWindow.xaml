@@ -1,0 +1,60 @@
+﻿<Window x:Class="CustomSort.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:checkCompositeCollection="clr-namespace:CustomSort"
+        xmlns:behaviors="clr-namespace:CustomSort.Behaviors"
+        xmlns:comparer="clr-namespace:CustomSort.Comparer"
+        Title="MainWindow"
+        Width="525"
+        Height="350"
+        d:DataContext="{d:DesignInstance d:Type={x:Type checkCompositeCollection:MainWindowViewModel}}"
+        mc:Ignorable="d">
+
+    <Window.Resources>
+        <comparer:PersonCustomComparer x:Key="PersonCustomComparer" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="37*" />
+            <RowDefinition Height="55*" />
+        </Grid.RowDefinitions>
+
+        <Button Content="Add Person">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <ei:CallMethodAction MethodName="AddItemToSourceA"
+                                         TargetObject="{Binding}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+
+        <DataGrid Grid.Row="2"
+                  Grid.RowSpan="2"
+                  CanUserSortColumns="True"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding Path=SourceA}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Name}"
+                                    Header="Name" />
+                <DataGridTextColumn Binding="{Binding Path=FamilyName}"
+                                    Header="FamilyName" />
+            </DataGrid.Columns>
+
+            <i:Interaction.Behaviors>
+                <behaviors:DataGridCompositeCollectionCustomSortBehavior DataGridCustomSortComparerBase="{StaticResource PersonCustomComparer}" />
+            </i:Interaction.Behaviors>
+
+        </DataGrid>
+    </Grid>
+
+</Window>
+
+
+
