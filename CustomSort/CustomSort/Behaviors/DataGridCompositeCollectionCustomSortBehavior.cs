@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Interactivity;
 using CustomSort.Base;
-using CustomSort.Extensions;
+using WpfExtensions;
 
 namespace CustomSort.Behaviors
 {
