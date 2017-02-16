@@ -16,3 +16,6 @@ This Behavior have a property which represents the information for the
 comparer.
 
 So enjoy it..
+
+
+ToDo: Filter !!
